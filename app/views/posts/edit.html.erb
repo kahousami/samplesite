@@ -1,6 +1,9 @@
 <div class="post-edit">
 	<h2>編集画面</h2>
-		<%= form_for @post do |f| %>
+
+		<%= form_for (@post) do |f| %>
+			<%= render 'layouts/error', model: f.object %>
+			
 			<div>
 				<p>
 					<%= f.label :title, "タイトル" %><br>
