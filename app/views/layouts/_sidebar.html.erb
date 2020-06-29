@@ -1,0 +1,20 @@
+<div class="sidebar">
+<table>
+	<tr>
+		<th class="category-headline">カテゴリー 一覧</th>
+	</tr>
+
+	<% categories.each do |category| %>
+		<tr>
+			<td class="category-list">
+				<%= link_to category.genre, category_path(category.id) %>
+			</td>
+		</tr>
+	<% end %>
+
+	<tr>
+		<td>➕<%= link_to "一覧", categories_path %></td>
+	</tr>
+</table>
+</div>
+

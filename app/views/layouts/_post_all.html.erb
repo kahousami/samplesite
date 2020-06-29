@@ -1,0 +1,23 @@
+<h2>投稿一覧</h2>
+<div class="post-all">
+	<% posts.each do |post| %>
+		<div class="post-each">
+			<div class="post-title">
+				● <%= link_to post.title, post_path(post.id) %>
+			</div>
+			<div class="post-item">
+				<strong>本文：</strong><br>
+				<%= post.content %>
+			</div>
+			<div class="post-item">
+				<strong>カテゴリー：</strong>
+				<% post.categories.each do |category| %>
+					<%= link_to category.genre, category_path(category.id) %>
+				<% end %>
+			</div>
+			<div class="post-item">
+				コメント：<%= post.post_comments.count %> 件
+			</div>
+		</div>
+	<% end %>
+</div>

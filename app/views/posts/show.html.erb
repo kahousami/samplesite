@@ -1,0 +1,69 @@
+<div class="row">
+	<div class="col-md-2">
+		<%= render 'layouts/sidebar', categories: @categories %>
+	</div>
+
+	<div class="col-md-8 post-show">
+		<ul>
+			<li class="">
+				<h3><%= @post.title %></h3>
+			</li>
+			<li class="">
+				<p class="category-item">
+					カテゴリー：
+					<% @post.categories.each do |category| %>
+						<%= link_to category.genre, category_path(category.id) %>
+					<% end %>				
+				</p>
+			</li>
+			<li class="">
+				<p><%= @post.content %></p>
+			</li>
+			<li class="">
+				<p>
+					<% if user_signed_in? %>
+						<% if @post.user_id == current_user.id %>
+							<%= link_to "編集", edit_post_path %>
+						<% end %>
+					<% end %>
+				</p>
+			</li>
+		</ul>
+
+		<div class="">
+			<p>コメント件数：全<%= @post.post_comments.count %>件</p>
+		</div>
+
+
+		<!-- コメント表示 -->
+		<ol>
+			<% @post.post_comments.each do |post_comment| %>
+				<li class="">
+					<%= post_comment.user.name %>
+					<%= post_comment.created_at.strftime('%Y/%m/%d') %>
+					<% if post_comment.user == current_user %>
+						<%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
+					<% end %>
+					<div>
+						<%= post_comment.comment %>
+					</div>
+				</li>
+			<% end %>
+		</ol>
+
+		<!-- コメント追加 -->
+			<% if user_signed_in? %>
+				<h3>コメント</h3>
+				<%= form_for [@post, @post_comment] do |f| %>
+					<div>
+						<%= f.text_area :comment, rows:'3', class: "form-control", placeholder: "コメントをここに" %>
+					</div>
+					<div>
+						<%= f.submit "送信する", class: "btn btn-primary pull-right" %>
+					</div>
+				<% end %>
+			<% end %>
+
+	</div>
+
+</div>

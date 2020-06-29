@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-md-2">
+    <%= render 'layouts/sidebar', categories: @categories %>
+  </div>
+
+  <div class="col-md-8">
+    <h2>検索結果</h2>
+    <div class="post-all">
+      <% @posts.each do |post| %>
+        <div class="post-each">
+          <div class="post-title">
+            <%= link_to post.title, post_path(post.id) %>
+          </div>
+          <div class="post-item">
+          	<%= post.content %>
+          </div>
+          <div class="post-item">
+          	<% post.categories.each do |category| %>
+          		<%= link_to category.genre %>
+          	<% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

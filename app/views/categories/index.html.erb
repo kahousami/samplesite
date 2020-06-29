@@ -1,0 +1,6 @@
+<div class="category-index">
+	<h2>カテゴリー 一覧</h2>
+	<% @categories.each do |category| %>
+		<span><%= link_to category.genre, category_path(category.id) %>  / </span>
+	<% end %>
+</div>
